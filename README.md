@@ -47,15 +47,13 @@ A personalized birthday experience built with Next.js. It starts with a short an
 Clone the repository, install dependencies, and start the development server:
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/YOUR_REPOSITORY.git
+git clone https://github.com/Harsh241104/Birthday-special.git
 cd birthday-site-main
 npm ci
 npm run dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) in your browser.
-
-Replace `YOUR_USERNAME/YOUR_REPOSITORY` with the GitHub repository URL after creating the repository.
 
 ## Production
 
