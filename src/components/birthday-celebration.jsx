@@ -9,19 +9,19 @@ export default function BirthdayCelebration() {
   const [activePhoto, setActivePhoto] = useState(0)
 
   const photos = [
-    "./images/44864915825.jpg",
-    "./images/8e1a19fb6dc74c8a8869da19d586714b.jpg",
-    "./images/WhatsApp Image 2026-09-17 at 22.26.36.jpeg",
-    "./images/WhatsApp Image 2026-09-17 at 22.26.37 (1).jpeg",
-    "./images/WhatsApp Image 2026-09-17 at 22.26.37.jpeg",
-    "./images/WhatsApp Image 2026-09-17 at 22.26.38 (1).jpeg",
-    "./images/WhatsApp Image 2026-09-17 at 22.26.38.jpeg",
-    "./images/WhatsApp Image 2026-09-18 at 10.38.00 (1).jpeg",
-    "./images/WhatsApp Image 2026-09-18 at 10.38.00.jpeg",
-    "./images/WhatsApp Image 2026-09-18 at 10.38.02 (1).jpeg",
-    "./images/WhatsApp Image 2026-09-18 at 10.38.02.jpeg",
-    "./images/WhatsApp Image 2026-09-18 at 10.38.03 (1).jpeg",
-    "./images/WhatsApp Image 2026-09-18 at 10.38.03.jpeg",
+    "./images/photo-01.jpeg",
+    "./images/photo-02.jpeg",
+    "./images/photo-03.jpeg",
+    "./images/photo-04.jpeg",
+    "./images/photo-05.jpeg",
+    "./images/photo-06.jpeg",
+    "./images/photo-07.jpeg",
+    "./images/photo-08.jpeg",
+    "./images/photo-09.jpeg",
+    "./images/photo-10.jpeg",
+    "./images/photo-11.jpeg",
+    "./images/photo-12.jpeg",
+    "./images/photo-13.jpeg",
   ]
 
   const showNextPhoto = () => {
@@ -118,10 +118,17 @@ export default function BirthdayCelebration() {
                   className="relative w-full flex-1 min-h-0 rounded-2xl overflow-hidden cursor-pointer focus:outline-none focus:ring-4 focus:ring-pink-300"
                   aria-label={`Show photo ${activePhoto + 1} of ${photos.length}. Click for the next photo.`}
                 >
+                  <span className="absolute inset-0 flex items-center justify-center bg-pink-50 px-4 text-center text-sm text-purple-700">
+                    Add a photo at public{photos[activePhoto].slice(1)}
+                  </span>
                   <img
+                    key={photos[activePhoto]}
                     src={photos[activePhoto]}
                     alt={`Birthday memory ${activePhoto + 1} of ${photos.length}`}
                     className="absolute inset-0 w-full h-full object-contain"
+                    onError={(event) => {
+                      event.currentTarget.style.display = "none"
+                    }}
                   />
                   <span className="absolute bottom-2 left-1/2 -translate-x-1/2 rounded-full bg-black/60 px-3 py-1 text-xs text-white">
                     Tap photo for next
