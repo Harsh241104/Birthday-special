@@ -1,117 +1,118 @@
-# Birthday Surprise Website
+# Birthday Special
 
-A personalized birthday experience built with Next.js. It starts with a short animated loader, counts down to midnight, and then opens an interactive celebration card with a private photo memory deck.
+A customizable birthday page with an animated countdown, a celebration card, a photo deck, and looping background music.
 
-## Preview
-
-### Loader
-
-![Birthday website loader](public/ss1.png)
-
-### Countdown
-
-![Birthday website countdown](public/ss2.png)
-
-### Celebration Card
-
-![Birthday website celebration](public/ss3.png)
+**Live site:** [https://harsh241104.github.io/Birthday-special/](https://harsh241104.github.io/Birthday-special/)
 
 ## Features
 
-- Live countdown with days, hours, minutes, and seconds.
-- Countdown target set to the next local midnight by default.
-- Animated loader, floating hearts, bubbles, and confetti.
-- Personalized birthday heading and messages.
-- Interactive card opened with the **Tap to open your card** button.
-- 13-photo memory deck with tap-to-next, Previous, Next, and Close controls.
-- Optional looping birthday music from `public/birthday.mp3`.
-- Responsive layout for desktop and mobile screens.
+- Animated intro, floating hearts, bubbles, and confetti.
+- A countdown that currently starts at 20 seconds when the page loads.
+- Personalized birthday heading and message.
+- A card with previous/next controls for up to 13 photos.
+- Background music that starts after the visitor clicks **For you**. Browsers generally require a user interaction before playing audio.
+- Automatic deployment to GitHub Pages when changes are pushed to `main`.
 
-## Tech Stack
+## Requirements
 
-- [Next.js 15](https://nextjs.org/)
-- [React 19](https://react.dev/)
-- [Tailwind CSS 4](https://tailwindcss.com/)
-- [Framer Motion](https://www.framer.com/motion/)
-- [Lucide React](https://lucide.dev/)
-
-## Getting Started
-
-### Prerequisites
-
-- Node.js 18.18 or newer
+- Node.js 20 or newer
 - npm
+- Git
 
-### Installation
+## Run locally
 
-Clone the repository, install dependencies, and start the development server:
+Clone the repository, install its dependencies, and start the development server:
 
 ```bash
 git clone https://github.com/Harsh241104/Birthday-special.git
-cd birthday-site-main
+cd Birthday-special
 npm ci
 npm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) in your browser.
+Open [http://localhost:3000/Birthday-special/](http://localhost:3000/Birthday-special/). The development server watches for code changes; stop it with `Ctrl+C`.
 
-## Production
-
-Run the checks and create an optimized production build:
+To create the production static export:
 
 ```bash
-npm run lint
 npm run build
-npm run start
 ```
 
-## Deploy on Vercel
+The build creates the static site in `out/`; the GitHub Actions workflow publishes this directory to GitHub Pages.
 
-1. Push this project to GitHub.
-2. Open [vercel.com](https://vercel.com) and sign in with GitHub.
-3. Select **Add New Project** and import this repository.
-4. Keep the default Next.js settings.
-5. Select **Deploy**.
+## Personalize the page
 
-Vercel will provide a public URL that can be shared with anyone. Photos in `public/images` and the music file in `public/birthday.mp3` are included in the deployment.
+### Greeting and message
 
-## Personalization
+Edit the heading, byline, and birthday messages in `src/components/birthday-celebration.jsx`.
 
 ### Countdown
 
-The default countdown targets the next local midnight using the visitor's device timezone. To use a fixed date and time, replace the `birthdayDate` state initializer in `src/app/page.jsx`:
+The current countdown is set in `src/app/page.jsx`:
+
+```js
+const [birthdayDate] = useState(() => new Date(Date.now() + 20 * 1000))
+```
+
+Change `20` to the number of seconds you want for a quick preview. For a fixed date and time, replace the expression with a date, for example:
 
 ```js
 const [birthdayDate] = useState(() => new Date("2027-04-28T00:00:00+05:30"))
 ```
 
-The time offset in the example is India Standard Time. Change it to the timezone required for the celebration.
-
-### Text
-
-Edit the heading, recipient name, and celebration messages in `src/components/birthday-celebration.jsx`.
+The `+05:30` suffix is the timezone offset in that example. Use the offset for the intended celebration time.
 
 ### Photos
 
-Place photos in `public/images` and update the `photos` array in `src/components/birthday-celebration.jsx`. Each path must begin with `/images/`.
-
-### Music
-
-Replace `public/birthday.mp3` with another MP3, or update the audio source in `src/app/page.jsx`. Browsers may block audio until the visitor interacts with the page.
-
-## Project Structure
+The photo deck uses these editable paths in `src/components/birthday-celebration.jsx`:
 
 ```text
-src/app/page.jsx                         Main countdown and celebration flow
+./images/photo-01.jpeg
+./images/photo-02.jpeg
+...
+./images/photo-13.jpeg
+```
+
+To add photos:
+
+1. Create the `public/images` directory if it does not exist.
+2. Add your image files there using the matching names above, or edit the `photos` array to match your filenames.
+3. Keep the `./images/` path prefix. It makes images load correctly both locally and under this repository's GitHub Pages address.
+4. Add and commit the image files if they should appear on the public site after deployment.
+
+The repository currently contains no birthday photos. Until matching image files are added, the card displays a placeholder showing the expected file path. Only publish photos you have permission to share; files in a public repository and website can be viewed or downloaded by anyone.
+
+### Background song
+
+Replace `public/birthday.mp3` with your own MP3, keeping the same filename. Alternatively, change the audio `src` in `src/app/page.jsx` to the path of another file in `public`. The song loops after the visitor clicks **For you**.
+
+## Deploy to GitHub Pages
+
+The workflow in `.github/workflows/deploy-pages.yml` builds the site and deploys it to GitHub Pages whenever a commit is pushed to `main`. To use this workflow in a fork or another repository:
+
+1. In GitHub, open **Settings → Pages** and set the build and deployment source to **GitHub Actions**.
+2. Update `basePath` and `assetPrefix` in `next.config.mjs` to match the repository name. For example, for a repository named `my-birthday`, use `/my-birthday`.
+3. Push your changes to `main`, or run **Deploy Birthday Site to GitHub Pages** manually from the repository's **Actions** tab.
+4. Wait for the workflow to finish, then open the Pages URL shown in the workflow or repository settings.
+
+For this repository, the published URL is [https://harsh241104.github.io/Birthday-special/](https://harsh241104.github.io/Birthday-special/).
+
+## Project structure
+
+```text
+src/app/page.jsx                         Countdown and celebration flow
+src/app/layout.js                        Page metadata and global layout
 src/components/countdown.jsx             Countdown display
-src/components/birthday-celebration.jsx Celebration text and photo deck
-src/components/Loader.jsx                Initial loading screen
-src/components/confetti.jsx              Celebration confetti
-src/components/floating-hearts.jsx      Background hearts
-public/images/                            Birthday photo assets
+src/components/birthday-celebration.jsx Greeting, message, and photo deck
+src/components/Loader.jsx                Intro animation
+src/components/confetti.jsx               Celebration confetti
+src/components/floating-hearts.jsx        Floating heart animation
 public/birthday.mp3                       Background music
+public/images/                            Add personal photos here
+.github/workflows/deploy-pages.yml        GitHub Pages deployment
+next.config.mjs                           Static export and Pages URL settings
 ```
 
 ## License
 
-This project is intended for personal use. Add a license file before redistributing it publicly.
+No license has been specified. Unless a license is added, normal copyright restrictions apply; ask the repository owner before redistributing this project.
