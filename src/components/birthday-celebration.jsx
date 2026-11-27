@@ -9,9 +9,19 @@ export default function BirthdayCelebration() {
   const [activePhoto, setActivePhoto] = useState(0)
 
   const photos = [
-    "./images/new/photo-1.jpeg",
-    "./images/new/photo-2.jpeg",
-    "./images/new/photo-3.jpeg",
+    "/images/44864915825.jpg",
+    "/images/8e1a19fb6dc74c8a8869da19d586714b.jpg",
+    "/images/WhatsApp Image 2026-09-17 at 22.26.36.jpeg",
+    "/images/WhatsApp Image 2026-09-17 at 22.26.37 (1).jpeg",
+    "/images/WhatsApp Image 2026-09-17 at 22.26.37.jpeg",
+    "/images/WhatsApp Image 2026-09-17 at 22.26.38 (1).jpeg",
+    "/images/WhatsApp Image 2026-09-17 at 22.26.38.jpeg",
+    "/images/WhatsApp Image 2026-09-18 at 10.38.00 (1).jpeg",
+    "/images/WhatsApp Image 2026-09-18 at 10.38.00.jpeg",
+    "/images/WhatsApp Image 2026-09-18 at 10.38.02 (1).jpeg",
+    "/images/WhatsApp Image 2026-09-18 at 10.38.02.jpeg",
+    "/images/WhatsApp Image 2026-09-18 at 10.38.03 (1).jpeg",
+    "/images/WhatsApp Image 2026-09-18 at 10.38.03.jpeg",
   ]
 
   const showNextPhoto = () => {
