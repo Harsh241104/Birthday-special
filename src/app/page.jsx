@@ -14,11 +14,7 @@ export default function Home() {
   const [isLoading, setIsLoading] = useState(true)
   const [bubbles, setBubbles] = useState([])
   const [showForYouBtn, setShowForYouBtn] = useState(false)
-  const [birthdayDate] = useState(() => {
-    const tonight = new Date()
-    tonight.setHours(24, 0, 0, 0)
-    return tonight
-  })
+  const [birthdayDate] = useState(() => new Date(Date.now() + 20 * 1000))
   const audioRef = useRef(null)
 
   useEffect(() => {
